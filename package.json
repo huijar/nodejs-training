@@ -1,5 +1,13 @@
 {
-    "name": "Hello world",
-    "version": "0.0.1",
-    "description": "A Node.js introduction project"
+  "name": "Hello world",
+  "version": "0.0.1",
+  "description": "A Node.js introduction project",
+  "devDependencies": {
+    "mocha": "~1.17.0",
+    "should": "~3.0.1",
+    "grunt-mocha-test": "~0.8.2"
+  },
+  "dependencies": {
+    "grunt": "~0.4.2"
+  }
 }

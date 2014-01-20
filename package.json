@@ -8,6 +8,7 @@
     "grunt-mocha-test": "~0.8.2"
   },
   "dependencies": {
-    "grunt": "~0.4.2"
+    "grunt": "~0.4.2",
+    "superagent": "~0.16.0"
   }
 }

@@ -1,5 +1,6 @@
 var querystring = require('querystring');
 var _ = require('underscore');
+var async = require('async');
 
 var get = require('./get.js');
 
@@ -28,6 +29,51 @@ module.exports = {
                     })
                 });
             }
+        });
+    },
+
+    today: function(city, cb) {
+        this.forecast(city, function(err, res) {
+            if (err) {
+                cb(err);
+            } else {
+                cb(null, _.extend({
+                    city: res.city
+                }, res.forecast[0]));
+            }
+        });
+    },
+
+    summary: function(cities, cb) {
+        async.map(cities, this.today.bind(this), function(err, citiesToday) {
+            if (err) {
+                cb(err);
+                return;
+            }
+
+            report = {};
+
+            report.numCities = citiesToday.length;
+
+            var hottestCity = _.max(citiesToday, function(city) {
+                return city.temp;
+            });
+            var coldestCity = _.min(citiesToday, function(city) {
+                return city.temp;
+            });
+            var windiestCity = _.max(citiesToday, function(city) {
+                return city.wind.speed;
+            });
+
+            report.hottest = _.pick(hottestCity, 'city', 'weather', 'temp');
+            report.coldest = _.pick(coldestCity, 'city', 'weather', 'temp');
+            report.windiest = {
+                city: windiestCity.city,
+                weather: windiestCity.weather,
+                windSpeed: windiestCity.wind.speed
+            };
+
+            cb(null, report);
         });
     }
 };

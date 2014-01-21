@@ -18,7 +18,7 @@ module.exports = {
                     city: city,
                     forecast: _.map(getRes.body.list, function(day) {
                         return {
-                            weather: day.weather.description,
+                            weather: day.weather[0].description,
                             temp: day.temp.day,
                             wind: {
                                 speed: day.speed,

@@ -12,6 +12,8 @@
     "grunt": "~0.4.2",
     "superagent": "~0.16.0",
     "grunt-express": "~1.2.1",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "underscore": "~1.5.2",
+    "async": "~0.2.9"
   }
 }
